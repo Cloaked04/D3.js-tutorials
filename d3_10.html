@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+	<head>
+		<title>D3-3</title> 
+		<script src='http://d3js.org/d3.v3.min.js'></script>
+	</head>
+	<body>
+		<script>
+    // Make curved line in d3.
+        
+       var canvas = d3.select('body').append('svg')
+                      .attr('width',600)
+                      .attr('height',600)
+                      .append('g')
+                          .attr('transform','translate(50,50)')
+
+       var tree = d3.layout.tree()
+                    .size([400,400]);
+
+       d3.json('filepath/filename.json',function(d){
+
+            var nodes = tree.nodes(data);              //Runs the tree layout and returns all the data object.
+            var links = tree.links(nodes);            //Assign links b/w different node.Takes nodes as input.
+
+            var node = canvas.selectAll('.node')            // Binding all nodes to canvas so they can be displayed.
+                             .data(nodes)                                   // Assigning them data.
+                             .enter()                                      // Entering the data.
+                             .append('g')                                 // Adding to group.
+                                .attr('class','node')                    // Assigning then class node.
+              .attr('transpose',function(d){return 'translate('+d.x+','+d.y+')';}); // Move each node to resp. (x,y)
+                                                                                    // Change to d.y,d.x for left to right layout
+
+
+            node.append(circle)                                     // Giving each node the shape of a circle.
+                .attr('r',5)                                       // Set radius.
+                .attr('fill','steelblue');                        // Color.
+
+            node.append('text')                                  // Append text to each node. 
+                .text(function(d){return d.name;});
+            
+            diagonal = d3.svg.diagonal()
+              .projection(function(d){return [d.y,d.x]});  // Accessor function for path to make it go from 
+                                                           // left to right.
+            var link = canvas.selectAll('.link')
+                .data(links)
+                .enter()
+                .append('path')
+                .attr('class','link')
+                  .attr('fill','none')
+                  .attr('stroke','#ADADAD')
+                  .attr('d',diagonal);
+
+       })
+
+       
+    </script>
+                
+	</body>
+</html>	

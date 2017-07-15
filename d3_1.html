@@ -1,0 +1,45 @@
+## D3 intro: Define a canvas for SVG(Scalable Vector Graphics) and draw simple shapes.
+
+<!doctype html>
+<html>
+	<head>
+	    <title>D3 Intro</title>
+	    <script src="http://d3js.org/d3.v3.min.js"></script>
+
+
+		<body>
+		    
+			<script>
+			// Canvas element: Think of this as the digital representation of canvas\
+			// paintings on. Height, width are scalable.
+
+				var canvas = d3.select("body")
+				               .append("svg")
+				               .attr('width',500)
+				               .attr('height',500);
+            // Draw circle,rectangle, line. Arrtibute variabels have their general mathematical meaning.
+
+				var circle = canvas.append('circle')
+				                   .attr('cx',250)
+				                   .attr('cy',250)
+				                   .attr('r',80)
+				                   .attr('fill','blue');
+
+				var rect = canvas.append('rect') 
+                                 .attr('width',20)
+                                 .attr('height',60)
+                                 .attr('fill','green');
+
+                var line = canvas.append('line')
+                                 .attr('x1',0)
+                                 .attr('x2',120)
+                                 .attr('y1',0)
+                                 .attr('y2',120)
+                                 .attr('stroke','red')
+                                 .attr('stroke-widht',10);
+
+				
+			</script>
+		</body>
+	</head>
+</html>

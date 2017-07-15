@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<title>D3-3</title> 
+		<script src='http://d3js.org/d3.v3.min.js'></script>
+	</head>
+	<body>
+		<script>
+		// Make a pack visualization. For bubble, conditionally set outer(circle,stroke) to zero.	
+			var width = 800,
+			    height = 800;
+
+			var canvas = d3.select('body').append('svg')
+			       .attr('width',width).attr('heigth',height)
+			       .append('g')
+			       .attr('transform','translate(50,50)');
+
+			var pack = d3.layout.pack()             // Init. pack layout.
+			   .size([width,height-50])             // Provide size to pack layout.
+			   .padding(10);                        // Provide padding to circles.
+
+			d3.json('filepath/filename.json', function(d){
+
+				var nodes = pack.nodes(data) // Make nodes for pack.
+                
+                var node = canvas.selectAll('.node')  //Select nodes in canvas.
+                  .data(nodes)                        // Bind 'em to data.
+                  .enter()                            // Enter
+                  .append('g')                        // Append to group, assign class and set positions. 
+                     .attr('class','node')
+                     .attr('transform',function(d){return 'translate('+ d.x+','+d.y+')';});
+
+                node.append('circle')                   //Append circle for each node.
+                 .attr('r',function(d){return d.r ;})   // Set radius as a function of data.
+                 .attr('fill','stellblue')
+                 .attr('opacity',0.30)
+                 .attr('stroke','#ADADAD')
+                 .attr('stroke-width','4')
+
+                node.append('text')
+                    .text(function(d){return d.children ? '':d.name ;}); //If node has children, set to nothing 
+                                                                         // else return d.name. Only d.name returns all names-looks ugly. 
+
+
+			})
+		</script>
+    </body>
+</html>

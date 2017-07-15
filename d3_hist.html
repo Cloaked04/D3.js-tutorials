@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<title>D3-3</title> 
+		<script src='http://d3js.org/d3.v3.min.js'></script>
+	</head>
+	<body>
+		<script>
+		// Make a pack visualization. For bubble, conditionally set outer(circle,stroke) to zero.	
+			var width = 800,
+			    height = 800,
+			    padding= 50;
+            
+            de.csv('filepath/filename.csv',function(d){
+
+                 var map = data.map(function(i){ return parseInt(i.age);}); // i refers to each row. Convert 
+                                                                            // to int for simplicity.
+
+                 var canvas = d3.select('body').append('svg')
+			       .attr('width',width).attr('heigth',height+padding);
+
+			     var histogram = d3.layout.histogram()
+			           .bins(7) // No. of bins.
+			           (map)
+
+			     var bars = canvas.selectAll('.bars') // Make bars for histogram.
+			                 .data(histogram)         // Data provided by histogram
+			                 .enter()       
+			                 .append('g');            // Form a group for collective manipulation.
+
+			     bars.append('rect')
+			      .attr('x', function(d){return d.x*5;}) // Set x to the initial value. '*' to make bars bigger.
+			      .attr('y',0) //Draw from base.
+			      .attr('width',function(d){return d.dx*5;}) // Set bin width to auto-computed span.
+			      .attr('height',function(d){return d.y*25};)    // Set height to 'y'.
+			      .attr('fill','steelblue')
+
+            })
+        </script>
+    </body>
+</html>

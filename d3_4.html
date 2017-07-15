@@ -1,0 +1,34 @@
+## Use transition to move objects around. Each tag is an event listener. Does the prescribed thing at the time said.
+
+<!doctype html>
+<html>
+	<head>
+		<title>D3-3</title> 
+		<script src='http://d3js.org/d3.v3.min.js'></script>
+	</head>
+	<body>
+		
+		<script>
+			
+			var canvas = d3.select('body')
+			               .append('svg')
+			               .attr('width',600)
+			               .attr('height',600);
+
+			var circle = canvas.append('circle')
+			                   .attr('cx',50)
+			                   .attr('cy',50)
+			                   .attr('fill','magenta')
+			                   .attr('r',50);	
+
+			circle.transition()
+			      .duration(1000)
+			      .delay(750)
+			      .attr('cx',300)
+			      .attr('cy',300)
+			      .each('start',function(){d3.select(this).attr('fill','red');})
+			      .each('end',function(){d3.select(this).attr('fill','yellow');});
+
+		</script>
+
+	</body>

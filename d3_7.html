@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head>
+		<title>D3-3</title> 
+		<script src='http://d3js.org/d3.v3.min.js'></script>
+	</head>
+	<body>
+		<script>
+		// Creating an arc in d3. Angles are defined in radians. We don't use any outside data.
+			
+			var canvas = d3.select('body')
+			               .append('svg')
+			               .attr('width',600).attr('height',600);
+
+                
+            var group = canvas.append('g')
+                              .attr('transform','translate(300,300)');
+
+            var r = 100
+            var p = Math.PI*2
+
+            var arc = d3.svg.arc()
+                         .innerRadius(r-10)
+                         .outerRadius(r)
+                         .startAngle(0)
+                         .endAngle(p);
+
+            group.append('path')
+                 .attr('d',arc);
+                   
+		</script>
+	</body>
+</html>	

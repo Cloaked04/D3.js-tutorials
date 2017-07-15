@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head>
+		<title>D3-3</title> 
+		<script src='http://d3js.org/d3.v3.min.js'></script>
+	</head>
+	<body>
+		<script>
+    // Make curved line in d3.
+        
+       var canvas = d3.select('body').append('svg')
+                      .attr('width',600)
+                      .attr('height',600);
+
+       var diagonal = d3.svg.diagonal()
+                        .source({x:10,y:11})
+                        .target({x:300,y:301});
+
+       canvas.append('path')
+             .attr('fill','none')
+             .attr('stroke','orange')
+             .attr('d',diagonal);
+
+    </script>
+                
+	</body>
+</html>	

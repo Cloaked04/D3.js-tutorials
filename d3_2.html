@@ -1,0 +1,28 @@
+## Drawing simple barcharts using D3. The function used each data point from dataArray and\
+## something with it. 'd' refers to datapoint, 'i' refers to index for each data point.
+
+<!doctype html>
+<html>
+	<head>
+		<title>D3-2</title>
+		<script src='http://d3js.org/d3.v3.min.js'></script>
+	</head>
+	<body>
+		<script>
+			var dataArray=[10,20,40]
+
+			var canvas= d3.select('body')
+			              .append('svg')
+			              .attr('width',600)
+			              .attr('height',600);
+
+			var bars = canvas.selectAll('rect')
+			                 .data(dataArray)
+			                 .enter()
+			                   .append('rect')
+			                   .attr('width', function(d){return d*10;})
+			                   .attr('height',50)
+			                   .attr('y', function(d,i){return i*100;}); 
+		</script>
+	</body>
+</html>
